@@ -25,4 +25,19 @@ class User extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function product() {
+        return $this->hasMany('App\Models\Product');
+    }
+
+    public function roleUser() {
+        return $this->belongsTo('App\Models\RoleUser');
+    }
+
+    public function order(){
+        return $this->hasMany('App\Models\Order');
+    }
+    public function wishlist() {
+        return $this->hasMany('App\Models\Wishlist');
+    }
 }

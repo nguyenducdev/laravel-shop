@@ -11,4 +11,8 @@ class Dissount extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['email'];
+
+    public function product(){
+        return $this->belongsTo('App/Models/Product');// có đúng ko nhỉ
+    }
 }
