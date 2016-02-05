@@ -18,11 +18,11 @@ class Order extends Model
         return $this->belongTo('App\Models\User');
     }
 
-    public function payment_mothod() {
+    public function paymentMethod() {
         return $this->belongTo('App\Models\PaymentMethod');
     }
 
     public function orderDetail() {
-        return $this->hasOne('App\Models\OrderDetail');
+        return $this->hasMany('App\Models\OrderDetail');
     }
 }

@@ -13,6 +13,6 @@ class Permission extends Model
     protected $fillable = ['name', 'label'];
 
     public function permissionRole() {
-        return $this->belongsTo('App\Models\PermissionRole');
+        return $this->hasMany('App\Models\PermissionRole');
     }
 }
