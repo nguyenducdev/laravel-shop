@@ -15,14 +15,14 @@ class Order extends Model
     ];
 
     public function user() {
-        return $this->belongTo('App\Models\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function paymentMethod() {
-        return $this->belongTo('App\Models\PaymentMethod');
+        return $this->belongsTo('App\Models\PaymentMethod');
     }
 
-    public function orderDetail() {
+    public function orderDetails() {
         return $this->hasMany('App\Models\OrderDetail');
     }
 }

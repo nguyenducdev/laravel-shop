@@ -40,15 +40,15 @@ class Product extends Model
         return $this->belongsTo('App\Models\Order');
     }
 
-    public function discountDetail() {
+    public function discountDetails() {
         return $this->hasMany('App\Models\DiscountDetail');
     }
 
-    public function orderDetail() {
+    public function orderDetails() {
         return $this->hasMany('App\Models\OrderDetail');
     }
 
-    public function wishlist() {
+    public function wishlists() {
         return $this->hasMany('App\Models\Wishlist');
     }
 }

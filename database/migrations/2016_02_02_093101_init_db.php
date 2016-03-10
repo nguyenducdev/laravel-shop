@@ -15,6 +15,7 @@ class InitDb extends Migration
         Schema::create('users', function(Blueprint $table) {
             $table->increments('id');
             $table->string('email');
+            $table->string('username');
             $table->string('password');
             $table->string('name');
             $table->string('phone');
@@ -44,22 +45,19 @@ class InitDb extends Migration
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->primary(['permission_id', 'role_id']);
         });
 
         Schema::create('role_user', function(Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+
             $table->primary(['user_id', 'role_id']);
         });
 
         Schema::create('categories', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->default(0);
+            $table->integer('parent_id')->default(0)->unsigned()->index();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
@@ -85,19 +83,15 @@ class InitDb extends Migration
             $table->decimal('old_price', 5, 2)->nullable();
             $table->string('short_description')->nullable();
             $table->text('description');
-            $table->integer('category_id')->unsigned();
-            $table->integer('brand_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('category_id')->unsigned()->index();
+            $table->integer('brand_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->boolean('status')->default(1);
             $table->string('avatar');
             $table->text('images')->nullable();
             $table->integer('view')->default(0);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('orders', function(Blueprint $table) {
@@ -116,14 +110,12 @@ class InitDb extends Migration
         });
 
         Schema::create('order_details', function(Blueprint $table) {
-            $table->integer('product_id')->unsigned();
-            $table->integer('order_id')->unsigned();
+            $table->integer('product_id')->unsigned()->index();
+            $table->integer('order_id')->unsigned()->index();
             $table->decimal('price');
             $table->integer('quantity');
             $table->integer('discount_id')->default(0);
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->primary(['product_id', 'order_id']);
         });
 
@@ -185,8 +177,6 @@ class InitDb extends Migration
             $table->integer('discount_id')->unsigned();
             $table->integer('product_id')->unsigned();
 
-            $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->primary(['discount_id', 'product_id']);
         });
 
@@ -230,8 +220,6 @@ class InitDb extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('product_id')->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->primary(['user_id', 'product_id']);
         });
 
