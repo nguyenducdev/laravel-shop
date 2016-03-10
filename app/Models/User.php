@@ -26,7 +26,7 @@ class User extends Model
         'password', 'remember_token',
     ];
 
-    public function product() {
+    public function products() {
         return $this->hasMany('App\Models\Product');
     }
 
@@ -34,10 +34,10 @@ class User extends Model
         return $this->belongsTo('App\Models\RoleUser');
     }
 
-    public function order(){
+    public function orders(){
         return $this->hasMany('App\Models\Order');
     }
-    public function wishlist() {
+    public function wishlists() {
         return $this->hasMany('App\Models\Wishlist');
     }
 }
