@@ -206,5 +206,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 
     ],
+    'file' => [
+        'max_upload_file_size' => 5128,
+    ],
 
 ];
