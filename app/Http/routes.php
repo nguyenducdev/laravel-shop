@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin/dashboard');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +30,40 @@ Route::get('/admin', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+    Route::group(['prefix' => 'admin'], function () {
+	    Route::get('/', function () {
+		    return view('admin/dashboard');
+		});
+		
+		Route::get('/category', [
+			'as' => 'Categoryindex',
+			'uses' => 'CategoriesController@index'
+		]);
+
+		Route::get('/category/add', [
+			'as' => 'Categorycreate',
+			'uses' => 'CategoriesController@create'
+		]);
+
+		Route::post('/category/postadd', [
+			'as' => 'Categorystore',
+			'uses' => 'CategoriesController@store'
+		]);
+
+		Route::get('/category/edit/{id}', [
+			'as' => 'Categoryedit',
+			'uses' => 'CategoriesController@edit'
+		]);
+
+		Route::post('/category/update/{id}', [
+			'as' => 'Categoryupdate',
+			'uses' => 'CategoriesController@update'
+		]);
+
+		Route::get('/category/destroy/{id}', [
+			'as' => 'Categorydestroy',
+			'uses' => 'CategoriesController@destroy'
+		]);
+
+	});
 });
