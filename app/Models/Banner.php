@@ -11,6 +11,6 @@ class Banner extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'title', 'description', 'image', 'url', 'status'
+        'title', 'description', 'image', 'url', 'status', 'updated_at', 'deleted_at'
     ];
 }
